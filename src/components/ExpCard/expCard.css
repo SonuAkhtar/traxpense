@@ -1,0 +1,11 @@
+.expCard_container {
+  background-color: rosybrown;
+  color: #fff;
+  height: 50px;
+  width: 200px;
+  border-radius: 1rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
