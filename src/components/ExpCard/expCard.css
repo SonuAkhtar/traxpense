@@ -1,11 +1,54 @@
 .expCard_container {
-  background-color: rosybrown;
+  background-color: #415a77;
   color: #fff;
-  height: 50px;
   width: 200px;
   border-radius: 1rem;
-  border: 1px solid black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+}
+
+.expCard_wrapper {
+  width: 100%;
+}
+
+.expCard_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expCard_title .expCard_month {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.expCard_title .bar {
+  margin: 0 0.25rem;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+.expCard_title .expCard_year {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.expCard_wrapper .expCard_time {
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 600px) {
+  .expCard_container {
+    width: 150px;
+    padding: 0.75rem 1rem;
+  }
+
+  .expCard_wrapper .expCard_time {
+    font-weight: 300;
+  }
 }

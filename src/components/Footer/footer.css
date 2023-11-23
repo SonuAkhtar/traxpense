@@ -1,7 +1,7 @@
 .footer_container {
   height: 8vh;
-  background-color: #333;
-  color: #fff;
+  background-color: #292f36;
+  color: #f7fff7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +10,30 @@
 
 .footer_details {
   display: flex;
+  width: max-content;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  font-size: 0.75rem;
+  font-weight: 300;
+}
+
+.footer_container .logo {
+  height: 100%;
+  width: 100px;
+}
+
+.footer_container .logo img {
+  height: 50px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 600px) {
+  .footer_details {
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+  }
 }

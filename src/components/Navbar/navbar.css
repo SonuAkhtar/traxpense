@@ -1,10 +1,22 @@
 .navbar_container {
-  background-color: yellow;
+  background-color: #444;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 10vh;
   padding: 0 1rem;
+  color: #fff;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
+}
+
+.logo img {
+  height: 75px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .user {
@@ -12,6 +24,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  font-weight: 300;
 }
 
 .user_image {

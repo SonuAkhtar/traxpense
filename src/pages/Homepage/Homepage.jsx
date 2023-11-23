@@ -12,21 +12,27 @@ const Homepage = () => {
   return (
     <>
       <div className="home_container">
-        <div className="title">All Expenses</div>
-        <div className="expense_area">No expense yet!</div>
-        <div className="expCards_container">
-          {testData.map((data) => (
-            <Link key={data.id} to={`/details/${data.id}`}>
-              <ExpCard data={data} />
-            </Link>
-          ))}
+        <div className="home_title">All Expenses</div>
+        {testData.length > 0 ? (
+          <div className="expCards_container">
+            {testData.map((data) => (
+              <Link
+                key={data.id}
+                to={`/details/${data.id}`}
+                state={{ data: data }}
+              >
+                <ExpCard data={data} />
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="expense_area">No expense yet!</div>
+        )}
+        <div className="home_new_button">
+          <button onClick={() => setOpenModel(true)}>Add New Expense</button>
         </div>
-        <div className="new_button">
-          <button onClick={() => setOpenModel(true)}>Add New</button>
-        </div>
+        <ExpModel openModel={openModel} setOpenModel={setOpenModel} />
       </div>
-
-      <ExpModel openModel={openModel} setOpenModel={setOpenModel} />
     </>
   );
 };

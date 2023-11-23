@@ -1,10 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
   return (
     <div className="navbar_container">
-      <div className="logo">Traxpense</div>
+      <Link to="/">
+        <div className="logo">
+          <img src="/images/traxpense_logo.png" alt="logo" />
+        </div>
+      </Link>
       <div className="user">
         <div className="user_image">
           <img src="/images/profile-image.png" alt="profile" />

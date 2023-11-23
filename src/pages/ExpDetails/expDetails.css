@@ -3,13 +3,54 @@
 }
 
 .expDetails_wrapper {
-  padding: 0 1rem;
   height: 100%;
-  background-color: greenyellow;
+  background-color: #b7e4c7;
+  overflow: hidden;
 }
 
 .expTitle {
+  padding: 0 1rem;
+}
+
+.expTitle .expTitle_month,
+.expTitle .expTitle_bar {
   font-size: 3rem;
+}
+
+.expTitle .expTitle_bar {
+  font-weight: 200;
+  margin: 0 0.25rem;
+}
+
+.expTitle .expTitle_year {
+  font-size: 1.5rem;
+}
+
+.expDetails_main {
+  margin: 1rem 0;
+}
+
+.expDetails_main .salary .salary_details {
+  height: 100%;
+  max-height: 15vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.expDetails_main .salary,
+.expDetails_main .otherExp,
+.expDetails_main .highExp {
+  background-color: #cce3de;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+}
+
+.expDetails_main .highExp .highExp_details {
+  height: 100%;
+  max-height: 25vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .salary_header,
@@ -17,7 +58,9 @@
 .otherExp_header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
+  width: 40%;
 }
 
 .salary_title,
@@ -30,4 +73,141 @@
 .highExp_card {
   display: flex;
   align-items: center;
+}
+
+.salary_card_name,
+.highExp_card_name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.salary_card_name span,
+.highExp_card_name span {
+  margin: 0 0.25rem;
+}
+
+.otherExp_details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.otherExp_card {
+  height: max-content;
+  width: max-content;
+  padding: 0.1rem 0.75rem;
+  background-color: #52796f;
+  color: #fff;
+  border-radius: 0.5rem;
+}
+
+.otherExp_amount {
+  font-size: 1.25rem;
+}
+
+.otherExp_time {
+  font-size: 0.75rem;
+}
+
+.add_btn {
+  background-color: transparent;
+}
+
+.add_btn i {
+  background-color: #386641;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(45deg);
+  padding: 0.1rem;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.add_btn i.open {
+  background-color: #ff4d6d;
+  transform: rotate(0deg);
+}
+
+.expDetails_inputs_area {
+  margin-top: 0.5rem;
+  width: max-content;
+}
+
+.expDetails_inputs_area input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.expDetails_inputs_area .input_name,
+.expDetails_inputs_area .input_amount,
+.expDetails_inputs_area button {
+  transition: all 0.5s ease-in;
+  transform: translateX(-100vw);
+}
+
+.expDetails_inputs_area.show .input_name {
+  transition: all 0.7s ease-in;
+  transform: translateX(0);
+}
+
+.expDetails_inputs_area.show .input_amount {
+  transition: all 0.6s ease-in;
+  transform: translateX(0);
+}
+
+.expDetails_inputs_area.show button {
+  transition: all 0.5s ease-in;
+  transform: translateX(0);
+}
+
+.expDetails_inputs_area input.input_amount {
+  max-width: 100px;
+}
+
+.expDetails_inputs_area button {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #386641;
+  color: #fff;
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 600px) {
+  .expTitle {
+    text-align: center;
+  }
+
+  .expTitle .expTitle_month,
+  .expTitle .expTitle_bar {
+    font-size: 2.5rem;
+  }
+
+  .expTitle .expTitle_year {
+    font-size: 1.1rem;
+  }
+
+  .salary_header,
+  .highExp_header,
+  .otherExp_header {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .expDetails_main .salary .salary_details {
+    max-height: 12vh;
+  }
+
+  .expDetails_inputs_area input.input_name {
+    max-width: 150px;
+  }
+
+  .expDetails_inputs_area input.input_amount {
+    max-width: 80px;
+  }
 }

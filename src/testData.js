@@ -2,9 +2,13 @@ export const testData = [
   {
     id: 0,
     month: "January",
+    year: "2023",
     type: "Fixed",
     time: "1:52 PM",
-    salary: 100000,
+    salary: [
+      { name: "Salary", amount: 10000, datetime: "12 Nov, 2:34 PM" },
+      { name: "CBI", amount: 9000, datetime: "13 Nov, 2:34 PM" },
+    ],
     spent: {
       fixed: {
         rd: 30000,
@@ -29,9 +33,13 @@ export const testData = [
   {
     id: 1,
     month: "February",
+    year: "2023",
     type: "Fixed",
     time: "1:52 PM",
-    salary: 100000,
+    salary: [
+      { name: "Salary", amount: 10000, datetime: "12 Nov, 2:34 PM" },
+      { name: "Kotak", amount: 9000, datetime: "13 Nov, 2:34 PM" },
+    ],
     spent: {
       fixed: {
         rd: 30000,
@@ -56,9 +64,13 @@ export const testData = [
   {
     id: 2,
     month: "March",
+    year: "2023",
     type: "Fixed",
     time: "1:52 PM",
-    salary: 100000,
+    salary: [
+      { name: "Salary", amount: 10000, datetime: "12 Nov, 2:34 PM" },
+      { name: "HDFC", amount: 9000, datetime: "13 Nov, 2:34 PM" },
+    ],
     spent: {
       fixed: {
         rd: 30000,
@@ -83,9 +95,13 @@ export const testData = [
   {
     id: 3,
     month: "April",
+    year: "2023",
     type: "Fixed",
     time: "1:52 PM",
-    salary: 100000,
+    salary: [
+      { name: "Salary", amount: 10000, datetime: "12 Nov, 2:34 PM" },
+      { name: "State", amount: 9000, datetime: "13 Nov, 2:34 PM" },
+    ],
     spent: {
       fixed: {
         rd: 30000,
@@ -110,9 +126,13 @@ export const testData = [
   {
     id: 4,
     month: "May",
+    year: "2023",
     type: "Fixed",
     time: "1:52 PM",
-    salary: 100000,
+    salary: [
+      { name: "Salary", amount: 10000, datetime: "12 Nov, 2:34 PM" },
+      { name: "HD-FC", amount: 9000, datetime: "13 Nov, 2:34 PM" },
+    ],
     spent: {
       fixed: {
         rd: 30000,

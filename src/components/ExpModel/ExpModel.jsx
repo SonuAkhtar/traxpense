@@ -5,18 +5,42 @@ const ExpModel = ({ openModel, setOpenModel }) => {
   const [expData, setExpData] = useState({
     month: "",
     type: "",
-    amount: 0,
+    amount: null,
   });
+
   return (
     <>
       <div className={`expModel_container ${openModel ? "open" : ""}`}>
-        <div className="expModel_form">
-          <input type="text" value={expData.month} />
-          <input type="text" value={expData.type} />
-          <input type="text" value={expData.amount} />
-          <button>Add Expense</button>
+        <div className="expModel_wrapper">
+          <div className="expModel_form">
+            <div className="expModel_form_inputs">
+              <input
+                type="text"
+                placeholder="Enter Month"
+                value={expData.month}
+              />
+              <input
+                type="text"
+                placeholder="Enter Type"
+                value={expData.type}
+              />
+              <input
+                type="text"
+                placeholder="Enter Amount"
+                value={expData.amount}
+              />
+            </div>
+            <div className="expModel_form_button">
+              <button>Add Expense</button>
+            </div>
+          </div>
+          <button
+            className="expModel_close"
+            onClick={() => setOpenModel(false)}
+          >
+            <i className="fas fa-times" />
+          </button>
         </div>
-        <button onClick={() => setOpenModel(false)}>Close</button>
       </div>
     </>
   );
