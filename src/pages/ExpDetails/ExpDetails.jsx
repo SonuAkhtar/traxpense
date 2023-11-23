@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+
+// imported CSS
 import "./expDetails.css";
 
 const ExpDetails = () => {
   const location = useLocation();
   const { data } = location.state;
 
+  //states to store API Data
   const [salary, setSalary] = useState(data.salary);
   const [highExp, setHighExp] = useState(data.spent.highExp);
   const [otherExp, setOtherExp] = useState(data.spent.others);
 
-  // states to manage input show
+  // states to show/hide inputs
   const [showSalaryInput, setShowSalaryInput] = useState(false);
   const [showHighInput, setShowHighInput] = useState(false);
   const [showOtherInput, setShowOtherInput] = useState(false);
@@ -55,19 +58,33 @@ const ExpDetails = () => {
     setOtherLast(otherAmt);
   };
 
+  // method to manage other Expenses
+  useEffect(() => {
+    let totalAmount = 0;
+
+    otherExp.forEach((item) => {
+      totalAmount += Number(item.amount);
+    });
+
+    console.log(otherExp);
+
+    setOtherTotal(totalAmount - otherExp[otherExp.length - 1].amount);
+    setOtherLast(otherExp[otherExp.length - 1].amount);
+  }, []);
+
   return (
     <div className="expDetails_container">
       <div className="expDetails_wrapper">
-        <div className="expTitle">
-          <span className="expTitle_month">{data.month}</span>
-          <span className="expTitle_bar">|</span>
-          <span className="expTitle_year">{data.year}</span>
+        <div className="expHeader">
+          <span className="expHeader_month">{data.month}</span>
+          <span className="expHeader_bar">|</span>
+          <span className="expHeader_year">{data.year}</span>
         </div>
 
         <div className="expDetails_main">
-          <div className="salary">
-            <div className="salary_header">
-              <div className="salary_title">Salary</div>
+          <section className="expSection salary">
+            <div className="expSection_header">
+              <div className="expSection_title">Salary</div>
               <button
                 className="add_btn"
                 onClick={() => setShowSalaryInput(!showSalaryInput)}
@@ -77,14 +94,14 @@ const ExpDetails = () => {
                 />
               </button>
             </div>
-            <div className="salary_details">
+            <div className="expSection_details">
               {salary.map((item, i) => (
-                <div key={i} className="salary_card">
-                  <div className="salary_card_name">
+                <div key={i} className="details_card">
+                  <div className="details_card_name">
                     {item.name}
                     <span>:</span>
                   </div>
-                  <div className="salary_card_amount">{item.amount}</div>
+                  <div className="details_card_amount">{item.amount}</div>
                 </div>
               ))}
             </div>
@@ -109,11 +126,11 @@ const ExpDetails = () => {
               />
               <button onClick={handleNewSalary}>ADD</button>
             </div>
-          </div>
+          </section>
 
-          <div className="highExp">
-            <div className="highExp_header">
-              <div className="highExp_title">High Expenses</div>
+          <section className="expSection highExp">
+            <div className="expSection_header">
+              <div className="expSection_title">High Expenses</div>
               <button
                 className="add_btn"
                 onClick={() => setShowHighInput(!showHighInput)}
@@ -121,13 +138,13 @@ const ExpDetails = () => {
                 <i className={`fas fa-times ${showHighInput ? "open" : ""}`} />
               </button>
             </div>
-            <div className="highExp_details">
+            <div className="expSection_details">
               {highExp.map((item, i) => (
-                <div key={i} className="highExp_card">
-                  <div className="highExp_card_name">
+                <div key={i} className="details_card">
+                  <div className="details_card_name">
                     {item.name} <span>:</span>
                   </div>
-                  <div className="highExp_card_amount">{item.amount}</div>
+                  <div className="details_card_amount">{item.amount}</div>
                 </div>
               ))}
             </div>
@@ -153,11 +170,11 @@ const ExpDetails = () => {
               />
               <button onClick={handleNewHigh}>ADD</button>
             </div>
-          </div>
+          </section>
 
-          <div className="otherExp">
-            <div className="otherExp_header">
-              <div className="otherExp_title">Other Expenses</div>
+          <section className="expSection otherExp">
+            <div className="expSection_header">
+              <div className="expSection_title">Other Expenses</div>
               <button
                 className="add_btn"
                 onClick={() => setShowOtherInput(!showOtherInput)}
@@ -165,14 +182,14 @@ const ExpDetails = () => {
                 <i className={`fas fa-times ${showOtherInput ? "open" : ""}`} />
               </button>
             </div>
-            <div className="otherExp_details">
-              <div className="otherExp_card">
-                <div className="otherExp_amount">{otherTotal}</div>
+            <div className="expSection_details">
+              <div className="details_card">
+                <div className="details_card_amount">{otherTotal}</div>
                 {/* <div className="otherExp_time">{`item.time`}</div> */}
               </div>
               <span>+</span>
-              <div className="otherExp_card">
-                <div className="otherExp_amount">{otherLast}</div>
+              <div className="details_card">
+                <div className="details_card_amount">{otherLast}</div>
                 {/* <div className="otherExp_time">{`item.time`}</div> */}
               </div>
             </div>
@@ -198,7 +215,7 @@ const ExpDetails = () => {
               />
               <button onClick={handleNewOther}>ADD</button>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>

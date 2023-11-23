@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// imported CSS
 import "./expModel.css";
 
 const ExpModel = ({ openModel, setOpenModel }) => {

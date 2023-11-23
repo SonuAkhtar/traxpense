@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import ExpModel from "../../components/ExpModel/ExpModel";
-import ExpCard from "../../components/ExpCard/ExpCard";
-import { Link } from "react-router-dom";
-import "./homepage.css";
 
-import { testData } from "../../testData";
+//components
+import Button from "../../components/Button/Button";
+import ExpModel from "../../components/ExpModel/ExpModel";
+import ExpContainer from "../../components/ExpContainer/ExpContainer";
+
+//imported CSS
+import "./homepage.css";
 
 const Homepage = () => {
   const [openModel, setOpenModel] = useState(false);
@@ -13,24 +15,14 @@ const Homepage = () => {
     <>
       <div className="home_container">
         <div className="home_title">All Expenses</div>
-        {testData.length > 0 ? (
-          <div className="expCards_container">
-            {testData.map((data) => (
-              <Link
-                key={data.id}
-                to={`/details/${data.id}`}
-                state={{ data: data }}
-              >
-                <ExpCard data={data} />
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="expense_area">No expense yet!</div>
-        )}
-        <div className="home_new_button">
-          <button onClick={() => setOpenModel(true)}>Add New Expense</button>
-        </div>
+
+        <ExpContainer />
+
+        <Button
+          handleBtn={() => setOpenModel(true)}
+          btnText={"Add New Expense"}
+        />
+
         <ExpModel openModel={openModel} setOpenModel={setOpenModel} />
       </div>
     </>

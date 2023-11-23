@@ -11,43 +11,15 @@
   font-weight: 500;
 }
 
-.home_new_button {
+.home_container .button_container {
   position: absolute;
   bottom: 5vh;
   left: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.home_new_button button {
-  font-size: 1.5rem;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  background-color: #386641;
-  color: #fff;
-}
-
-.expCards_container {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0;
-  justify-content: space-between;
-  max-height: 55vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 /* Responsive design for mobile */
 @media screen and (max-width: 600px) {
   .home_title {
     font-size: 2rem;
-  }
-
-  .home_new_button button {
-    font-size: 1.25rem;
   }
 }

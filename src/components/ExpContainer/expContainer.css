@@ -1,0 +1,17 @@
+.expContainer_wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  justify-content: space-between;
+  max-height: 55vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.no_expense_text {
+  text-align: center;
+  margin-top: 25vh;
+}
