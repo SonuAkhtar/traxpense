@@ -9,68 +9,141 @@ const ExpDetails = () => {
   const { data } = location.state;
 
   //states to store API Data
-  const [salary, setSalary] = useState(data.salary);
-  const [highExp, setHighExp] = useState(data.spent.highExp);
-  const [otherExp, setOtherExp] = useState(data.spent.others);
+  const [dataSavings, setDataSavings] = useState(data.savings);
+  const [dataHighExp, setDataHighExp] = useState(data.spent.highExp);
+  const [dataOtherExp, setDataOtherExp] = useState(data.spent.othersExp);
 
   // states to show/hide inputs
-  const [showSalaryInput, setShowSalaryInput] = useState(false);
+  const [showSavingsInput, setShowSavingsInput] = useState(false);
   const [showHighInput, setShowHighInput] = useState(false);
   const [showOtherInput, setShowOtherInput] = useState(false);
 
+  const [showOtherAll, setShowOtherAll] = useState(false);
+
   // states to manage input values
-  const [salaryName, setSalaryName] = useState("");
-  const [salaryAmt, setSalaryAmt] = useState(null);
+  //---Savings
+  const [savingsVal, setSavingsVal] = useState({
+    text: "",
+    amount: "",
+  });
 
-  const [highName, setHighName] = useState("");
-  const [highAmt, setHighAmt] = useState(null);
+  //---Expenses types
+  const [expMonthly, setExpMonthly] = useState({
+    text: "",
+    amount: null,
+  });
 
-  const [otherName, setOtherName] = useState("");
-  const [otherAmt, setOtherAmt] = useState(null);
+  const [expHigh, setExpHigh] = useState({
+    text: "",
+    amount: null,
+  });
+
+  const [expOthers, setExpOthers] = useState({
+    text: "",
+    amount: null,
+  });
+
   const [otherTotal, setOtherTotal] = useState(0);
   const [otherLast, setOtherLast] = useState(0);
 
+  // methods to handle when an input value changes
+  const handleInputChange = (e, type) => {
+    switch (type) {
+      case "savings":
+        setSavingsVal((s) => ({
+          ...s,
+          [e.target.name]: e.target.value,
+        }));
+        break;
+
+      case "spent_high":
+        setExpHigh((s) => ({
+          ...s,
+          [e.target.name]: e.target.value,
+        }));
+        break;
+
+      case "spent_others":
+        setExpOthers((s) => ({
+          ...s,
+          [e.target.name]: e.target.value,
+        }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
   // methods to handle when a new item is added
-  const handleNewSalary = () => {
-    setSalary([...salary, { name: salaryName, amount: salaryAmt }]);
-    setSalaryName("");
-    setSalaryAmt(null);
-  };
+  const handleNewExp = (type) => {
+    switch (type) {
+      case "savings":
+        setDataSavings([
+          ...dataSavings,
+          { name: savingsVal.text, amount: savingsVal.amount },
+        ]);
+        setSavingsVal({ text: "", amount: "" });
+        break;
 
-  const handleNewHigh = () => {
-    setHighExp([...highExp, { name: highName, amount: highAmt }]);
-    setHighName("");
-    setHighAmt(null);
-  };
+      case "spent_high":
+        setDataHighExp([
+          ...dataHighExp,
+          { name: expHigh.text, amount: expHigh.amount },
+        ]);
+        setExpHigh({ text: "", amount: "" });
+        break;
 
-  const handleNewOther = () => {
-    setOtherExp([...otherExp, { name: otherName, amount: otherAmt }]);
-    setOtherName("");
-    setOtherAmt(null);
+      case "spent_others":
+        setDataOtherExp([
+          ...dataOtherExp,
+          { name: expOthers.text, amount: expOthers.amount },
+        ]);
+        setExpOthers({ text: "", amount: "" });
+        break;
 
-    let totalAmount = 0;
-
-    otherExp.forEach((item) => {
-      totalAmount += Number(item.amount);
-    });
-
-    setOtherTotal(totalAmount);
-    setOtherLast(otherAmt);
+      default:
+        break;
+    }
   };
 
   // method to manage other Expenses
   useEffect(() => {
     let totalAmount = 0;
 
-    otherExp.forEach((item) => {
+    dataOtherExp.forEach((item) => {
       totalAmount += Number(item.amount);
     });
 
-    console.log(otherExp);
+    setOtherTotal(totalAmount - dataOtherExp[dataOtherExp.length - 1].amount);
+    setOtherLast(dataOtherExp[dataOtherExp.length - 1].amount);
+  }, [dataOtherExp]);
 
-    setOtherTotal(totalAmount - otherExp[otherExp.length - 1].amount);
-    setOtherLast(otherExp[otherExp.length - 1].amount);
-  }, []);
+  // method to show/hide inputs
+  const showHideInput = (type) => {
+    switch (type) {
+      case "savings":
+        setShowSavingsInput(!showSavingsInput);
+        setShowHighInput(false);
+        setShowOtherInput(false);
+        break;
+
+      case "spent_high":
+        setShowSavingsInput(false);
+        setShowHighInput(!showHighInput);
+        setShowOtherInput(false);
+        break;
+
+      case "spent_others":
+        setShowSavingsInput(false);
+        setShowHighInput(false);
+        setShowOtherInput(!showOtherInput);
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="expDetails_container">
@@ -82,69 +155,79 @@ const ExpDetails = () => {
         </div>
 
         <div className="expDetails_main">
-          <section className="expSection salary">
+          {/* ----- Section Savings ----- */}
+          <section className="expSection savings">
             <div className="expSection_header">
-              <div className="expSection_title">Salary</div>
+              <div className="expSection_title">Savings</div>
               <button
                 className="add_btn"
-                onClick={() => setShowSalaryInput(!showSalaryInput)}
+                onClick={() => showHideInput("savings")}
               >
                 <i
-                  className={`fas fa-times ${showSalaryInput ? "open" : ""}`}
+                  className={`fas fa-times ${showSavingsInput ? "open" : ""}`}
                 />
               </button>
             </div>
             <div className="expSection_details">
-              {salary.map((item, i) => (
+              {dataSavings.map((item, i) => (
                 <div key={i} className="details_card">
                   <div className="details_card_name">
                     {item.name}
                     <span>:</span>
                   </div>
-                  <div className="details_card_amount">{item.amount}</div>
+                  <div className="details_card_amount">
+                    <span className="rupee_sign">&#8377;</span>
+                    {item.amount}
+                  </div>
                 </div>
               ))}
             </div>
             <div
               className={`expDetails_inputs_area ${
-                showSalaryInput ? "show" : ""
+                showSavingsInput ? "show" : ""
               }`}
             >
               <input
                 type="text"
                 placeholder="Name"
                 className="input_name"
-                value={salaryName}
-                onChange={(e) => setSalaryName(e.target.value)}
+                name="text"
+                value={savingsVal.text}
+                onChange={(e) => handleInputChange(e, "savings")}
               />
               <input
                 type="text"
                 className="input_amount"
                 placeholder="Amount"
-                value={salaryAmt}
-                onChange={(e) => setSalaryAmt(e.target.value)}
+                name="amount"
+                value={savingsVal.amount}
+                onChange={(e) => handleInputChange(e, "savings")}
               />
-              <button onClick={handleNewSalary}>ADD</button>
+              <button onClick={() => handleNewExp("savings")}>ADD</button>
             </div>
           </section>
 
+          {/* ----- Section Spent High ----- */}
           <section className="expSection highExp">
             <div className="expSection_header">
               <div className="expSection_title">High Expenses</div>
               <button
                 className="add_btn"
-                onClick={() => setShowHighInput(!showHighInput)}
+                onClick={() => showHideInput("spent_high")}
               >
                 <i className={`fas fa-times ${showHighInput ? "open" : ""}`} />
               </button>
             </div>
             <div className="expSection_details">
-              {highExp.map((item, i) => (
+              {dataHighExp.map((item, i) => (
                 <div key={i} className="details_card">
                   <div className="details_card_name">
                     {item.name} <span>:</span>
                   </div>
-                  <div className="details_card_amount">{item.amount}</div>
+                  <div className="details_card_amount">
+                    <span className="rupee_sign">&#8377;</span>
+                    {item.amount}
+                  </div>
                 </div>
               ))}
             </div>
@@ -158,38 +241,66 @@ const ExpDetails = () => {
                 type="text"
                 placeholder="Name"
                 className="input_name"
-                value={highName}
-                onChange={(e) => setHighName(e.target.value)}
+                name="text"
+                value={expHigh.text}
+                onChange={(e) => handleInputChange(e, "spent_high")}
               />
               <input
                 type="text"
                 placeholder="Amount"
                 className="input_amount"
-                value={highAmt}
-                onChange={(e) => setHighAmt(e.target.value)}
+                name="amount"
+                value={expHigh.amount}
+                onChange={(e) => handleInputChange(e, "spent_high")}
               />
-              <button onClick={handleNewHigh}>ADD</button>
+              <button onClick={() => handleNewExp("spent_high")}>ADD</button>
             </div>
           </section>
 
+          {/* ----- Section Spent Others ----- */}
           <section className="expSection otherExp">
             <div className="expSection_header">
               <div className="expSection_title">Other Expenses</div>
               <button
                 className="add_btn"
-                onClick={() => setShowOtherInput(!showOtherInput)}
+                onClick={() => showHideInput("spent_others")}
               >
                 <i className={`fas fa-times ${showOtherInput ? "open" : ""}`} />
               </button>
             </div>
             <div className="expSection_details">
               <div className="details_card">
-                <div className="details_card_amount">{otherTotal}</div>
+                <div
+                  className={`details_card_amount others ${
+                    showOtherAll && "show"
+                  }`}
+                >
+                  <span className="rupee_sign">&#8377;</span>
+                  {otherTotal}
+                </div>
                 {/* <div className="otherExp_time">{`item.time`}</div> */}
+
+                <div
+                  className={`expOthers_all_amount ${showOtherAll && "show"}`}
+                >
+                  <span className="plus">=</span>
+                  {dataOtherExp.map((item, i) => (
+                    <div key={i}>
+                      <span className="details_card_amount">{item.amount}</span>
+                      <span className="plus">+</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <span>+</span>
+              <span className="plus">+</span>
               <div className="details_card">
-                <div className="details_card_amount">{otherLast}</div>
+                <div
+                  onClick={() => setShowOtherAll(!showOtherAll)}
+                  className="details_card_amount"
+                >
+                  <span className="rupee_sign">&#8377;</span>
+                  {otherLast}
+                </div>
                 {/* <div className="otherExp_time">{`item.time`}</div> */}
               </div>
             </div>
@@ -203,17 +314,19 @@ const ExpDetails = () => {
                 type="text"
                 placeholder="Name"
                 className="input_name"
-                value={otherName}
-                onChange={(e) => setOtherName(e.target.value)}
+                name="text"
+                value={expOthers.text}
+                onChange={(e) => handleInputChange(e, "spent_others")}
               />
               <input
                 type="text"
                 placeholder="Amount"
                 className="input_amount"
-                value={otherAmt}
-                onChange={(e) => setOtherAmt(e.target.value)}
+                name="amount"
+                value={expOthers.amount}
+                onChange={(e) => handleInputChange(e, "spent_others")}
               />
-              <button onClick={handleNewOther}>ADD</button>
+              <button onClick={() => handleNewExp("spent_others")}>ADD</button>
             </div>
           </section>
         </div>

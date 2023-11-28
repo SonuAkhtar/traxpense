@@ -1,10 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&family=Ubuntu:wght@300&display=swap");
+
 .expDetails_container {
   height: 100%;
 }
 
 .expDetails_wrapper {
   height: 100%;
-  background-color: #b7e4c7;
+  background-color: #f3f3f3;
   overflow: hidden;
 }
 
@@ -30,18 +32,26 @@
   margin: 1rem 0;
 }
 
+.expDetails_main .expSection {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+}
+
+.expDetails_main .expSection.salary {
+  background-color: #cdf6bb;
+}
+
+.expDetails_main .expSection.highExp,
+.expDetails_main .expSection.otherExp {
+  background-color: #f3b9b9;
+}
+
 .expDetails_main .salary .expSection_details {
   height: 100%;
   max-height: 15vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
-}
-
-.expDetails_main .expSection {
-  background-color: #cce3de;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 1rem;
-  margin: 0.25rem 0;
 }
 
 .expDetails_main .highExp .expSection_details {
@@ -86,18 +96,62 @@
 
 .otherExp .details_card {
   height: max-content;
-  width: max-content;
+  width: auto;
   padding: 0.1rem 0.75rem;
   background-color: #52796f;
   color: #fff;
   border-radius: 0.5rem;
 }
 
-.otherExp_amount {
-  font-size: 1.25rem;
+.details_card_amount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.otherExp .expSection_details span {
+.details_card_amount.others.show {
+  font-size: 1.25rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.expOthers_all_amount {
+  gap: 0.5rem;
+  overflow: hidden;
+  display: none;
+}
+
+.expOthers_all_amount.show {
+  width: max-content;
+  transition: all 0.3s ease;
+  display: flex;
+}
+
+.expOthers_all_amount div {
+  padding: 0 0.15rem;
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 300;
+  background-color: #fff;
+  color: #52796f;
+  border-radius: 0.5rem;
+  transform: translateX(-50vw);
+  transition: all 0.3s ease;
+}
+
+.expOthers_all_amount.show div {
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.rupee_sign {
+  font-weight: 300;
+  font-size: 0.9rem;
+  font-family: "Ubuntu", sans-serif;
+  margin-right: 0.1rem;
+}
+
+.otherExp .expSection_details .plus {
   font-size: 1.25rem;
 }
 
