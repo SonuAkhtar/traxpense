@@ -8,10 +8,13 @@
   max-height: 55vh;
   overflow: hidden;
   overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 .no_expense_text {
   text-align: center;
   margin-top: 25vh;
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 600px) {
 }
